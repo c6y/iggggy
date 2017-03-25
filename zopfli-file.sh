@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 # Zopfli docs: https://github.com/google/zopfli
 # compress a file, write exif tags: 'Software', 'CreateDate'
+# then add standard eboy metadata
 
 # store value of 'Software' tag
 Software=$(exiftool -Software "$1")
@@ -10,6 +11,7 @@ if [[ "$Software" == *zopflipng ]];
     # no need to compress if 'Software' tag is 'zopflipng'
     echo "already zopflified: $1"
   else
+    echo "----================================================================="
     # store value of 'CreateDate' tag
     CreateDate=$(exiftool -CreateDate "$1")
 
@@ -31,6 +33,10 @@ if [[ "$Software" == *zopflipng ]];
       -overwrite_original \
       $tmpfile
 
-    # copy temp file to source png
-    mv "$tmpfile" "$1"
+    # add eboyexif — $tmpfile returns as $FILE
+    appdir=$(dirname "$0")
+    source "$appdir/eboyexif-file.sh" $tmpfile
+
+    # finally move to original file
+    mv "$FILE" "$1"
 fi
