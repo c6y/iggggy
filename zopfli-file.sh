@@ -2,9 +2,6 @@
 # Zopfli docs: https://github.com/google/zopfli
 # compress a file, write exif tags: 'Software', 'CreateDate'
 
-# store value of 'CreateDate' tag
-CreateDate=$(exiftool -CreateDate "$1")
-
 # store value of 'Software' tag
 Software=$(exiftool -Software "$1")
 
@@ -13,6 +10,9 @@ if [[ "$Software" == *zopflipng ]];
     # no need to compress if 'Software' tag is 'zopflipng'
     echo "already zopflified: $1"
   else
+    # store value of 'CreateDate' tag
+    CreateDate=$(exiftool -CreateDate "$1")
+
     # create temp png file (doesn't have to be png — but hey, why not!)
     # also ok and simpler: tmpfile=$(mktemp)
     tmpfile=$(mktemp $TMPDIR/$(uuidgen).png)
