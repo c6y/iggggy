@@ -4,6 +4,7 @@
 # then add standard eboy metadata
 
 # store value of 'Software' tag
+# (if 'Software' is not set, the variable will be empty, which seems to be ok)
 Software=$(exiftool -Software "$1")
 
 if [[ "$Software" == *zopflipng ]];
@@ -33,10 +34,6 @@ if [[ "$Software" == *zopflipng ]];
       -overwrite_original \
       $tmpfile
 
-    # add eboyexif — $tmpfile returns as $FILE
-    appdir=$(dirname "$0")
-    source "$appdir/eboyexif-file.sh" $tmpfile
-
     # finally move to original file
-    mv "$FILE" "$1"
+    mv "$tmpfile" "$1"
 fi
