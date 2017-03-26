@@ -12,7 +12,7 @@ if [[ "$Software" == *zopflipng ]];
     # no need to compress if 'Software' tag is 'zopflipng'
     echo "already zopflified: $1"
   else
-    echo "----================================================================="
+    echo "--- ===================================================================="
     # store value of 'CreateDate' tag
     CreateDate=$(exiftool -CreateDate "$1")
 
