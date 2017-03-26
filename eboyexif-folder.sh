@@ -22,7 +22,6 @@ exiftool \
   -r \
   -if 'not defined $XMP-cc:AttributionName' \
   -XMP-cc:AttributionName="none" \
-  -FileName \
   -overwrite_original \
   .
 
