@@ -15,22 +15,12 @@ EBOYURL="http://hello.eboy.com"
 LICENSE="https://creativecommons.org/licenses/by-nc-nd/4.0/"
 LEGALCODE="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode"
 
-# HACK: sets -XMP-cc:AttributionName to 'none' if not defined
-# this makes it possible to search for all values not containing 'eBoy' ...
-# ... in the command that sets the full metadata
-exiftool \
-  -r \
-  -if 'not defined $XMP-cc:AttributionName' \
-  -XMP-cc:AttributionName="none" \
-  -overwrite_original \
-  .
-
 # Set metadata for all files that don't have the AttributionName set to 'eBoy'
 # will not change -CreateDate and -Software tags
 exiftool \
   -r \
-  -if 'not $XMP-cc:AttributionName =~ /eBoy/' \
-  -TagsFromFile @ -CreateDate, -Software \
+  -if 'not defined $XMP-cc:AttributionName or not $XMP-cc:AttributionName =~ /eBoy/' \
+  -TagsFromFile @ -CreateDate -Software \
   -all= \
   -MetaDataDate="$DATE" \
   -artist="$CREATOR" \
