@@ -20,9 +20,10 @@ LEGALCODE="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode"
 exiftool \
   -r \
   -if 'not defined $XMP-cc:AttributionName or not $XMP-cc:AttributionName =~ /eBoy/' \
-  -TagsFromFile @ -CreateDate -Software \
   -all= \
-  -MetaDataDate="$DATE" \
+  -createdate=now "-createdate<createdate" \
+  "-software<software" \
+  -MetaDataDate=now \
   -artist="$CREATOR" \
   -rights="$COPYRIGHT" \
   -XMP-cc:AttributionName="$CREATOR" \
