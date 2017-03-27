@@ -7,13 +7,9 @@
 # Add time stamp to -MetaDataDate
 # Apply other eBoy metadata
 
-CREATOR="eBoy"
-THISYEAR=`date +'%Y'`
-DATE=`date +%Y:%m:%d\ %H:%M:%S%z`
-COPYRIGHT="©"$THISYEAR" eBoy (Kai Vermehr, Steffen Sauerteig, Svend Smital), all rights reserved."
-EBOYURL="http://hello.eboy.com"
-LICENSE="https://creativecommons.org/licenses/by-nc-nd/4.0/"
-LEGALCODE="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode"
+# Load variables
+appdir=$(dirname "$0")
+source "$appdir/settings.sh"
 
 # Set metadata for all files that don't have the AttributionName set to 'eBoy'
 # will not change -CreateDate and -Software tags
@@ -27,14 +23,14 @@ exiftool \
   -artist="$CREATOR" \
   -rights="$COPYRIGHT" \
   -XMP-cc:AttributionName="$CREATOR" \
-  -XMP-cc:License="$LICENSE" \
-  -XMP-cc:LegalCode="$LEGALCODE" \
-  -XMP-cc:Jurisdiction="International" \
+  -XMP-cc:License="$ccLICENSE" \
+  -XMP-cc:LegalCode="$ccLEGALCODE" \
+  -XMP-cc:Jurisdiction="$ccJURISDICTION" \
   -XMP-cc:AttributionURL="$EBOYURL" \
-  -XMP-cc:Permits="Sharing" \
-  -XMP-cc:Requires="Attribution" \
-  -XMP-cc:Prohibits="Commercial Use" \
+  -XMP-cc:Permits="$ccPERMITS" \
+  -XMP-cc:Requires="$ccREQUIRES" \
+  -XMP-cc:Prohibits="$ccPROHIBITS" \
   -XMP-dc:Creator="$CREATOR" \
-  -XMP-xmpRights:Marked=true \
+  -XMP-xmpRights:Marked=$xmpRIGHTSMARKED \
   -overwrite_original \
   .
