@@ -21,12 +21,8 @@ exiftool \
   -MetaDataDate=now \
   -artist="$CREATOR" \
   -XMP-cc:AttributionName="$CREATOR" \
-  -XMP-cc:License="$ccLICENSE" \
-  -XMP-cc:LegalCode="$ccLEGALCODE" \
   -XMP-cc:AttributionURL="$EBOYURL" \
   -XMP-dc:Creator="$CREATOR" \
-  -XMP-xmpRights:Marked=$xmpRIGHTSMARKED \
   -XMP-xmpRights:Owner="$CREATOR" \
-  -XMP-xmpRights:UsageTerms="$ccTERMS" \
   -overwrite_original \
   .
